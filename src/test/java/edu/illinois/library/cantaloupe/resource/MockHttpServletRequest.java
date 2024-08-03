@@ -34,6 +34,11 @@ public class MockHttpServletRequest implements HttpServletRequest {
     private final Map<String, List<String>> headers = new HashMap<>();
 
     @Override
+    public Locale getLocale() {
+        return null;
+    }
+
+    @Override
     public String getProtocolRequestId() {
         return null;
     }
