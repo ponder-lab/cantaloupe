@@ -398,11 +398,9 @@ abstract class HttpSourceTest extends AbstractSourceTest {
             @Override
             public boolean handle(Request request,
                                org.eclipse.jetty.server.Response response,
-                               Callback callback) {
+                               Callback callback) throws Exception {
                 response.getHeaders().put("Accept-Ranges", "bytes");
-                try {
-                    Content.Sink.copyFromPath(TestUtil.getImage(fixture), response, callback);
-                }
+                Content.Sink.copyFromPath(TestUtil.getImage(fixture), response, callback);
                 return true;
             }
         });
