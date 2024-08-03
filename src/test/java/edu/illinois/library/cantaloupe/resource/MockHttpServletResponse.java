@@ -42,17 +42,7 @@ public class MockHttpServletResponse implements HttpServletResponse {
     }
 
     @Override
-    public String encodeRedirectUrl(String s) {
-        return null;
-    }
-
-    @Override
     public String encodeRedirectURL(String s) {
-        return null;
-    }
-
-    @Override
-    public String encodeUrl(String s) {
         return null;
     }
 
@@ -185,12 +175,6 @@ public class MockHttpServletResponse implements HttpServletResponse {
     @Override
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    @Override
-    public void setStatus(int status, String description) {
-        setStatus(status);
-        this.description = description;
     }
 
 }
