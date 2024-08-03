@@ -105,6 +105,7 @@ public class HTTPStreamFactoryTest extends BaseTest {
                                Callback callback) {
                 assertEquals("yes", request.getHeaders().get("X-Custom"));
                 callback.succeeded();
+                return true;
             }
         });
         server.start();
@@ -193,6 +194,7 @@ public class HTTPStreamFactoryTest extends BaseTest {
                                Callback callback) {
                 assertEquals("yes", request.getHeaders().get("X-Custom"));
                 callback.succeeded();
+                return true;
             }
         });
         server.start();
