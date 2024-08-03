@@ -2,6 +2,9 @@ package edu.illinois.library.cantaloupe.test;
 
 import edu.illinois.library.cantaloupe.http.Server;
 import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHandler;
 
 import java.net.URI;
 import java.nio.file.Path;
@@ -27,6 +30,11 @@ public final class WebServer {
         wrappedServer.setHTTP2Enabled(true);
         wrappedServer.setHTTPS1Enabled(true);
         wrappedServer.setHTTPS2Enabled(true);
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        wrappedServer.setHandler(context);
+        ServletHandler handler = new ServletHandler();
+        context.setServletHandler(handler);
     }
 
     public URI getHTTPURI() {
