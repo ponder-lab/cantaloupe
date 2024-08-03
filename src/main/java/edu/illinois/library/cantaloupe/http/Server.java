@@ -26,7 +26,6 @@ import org.eclipse.jetty.util.resource.PathResource;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 
 /**
@@ -156,7 +155,7 @@ public final class Server {
             contextHandler.setHandler(handler);
             contextHandler.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false");
             handler.setAcceptRanges(isAcceptingRanges);
-            contextHandler.setBaseResource(new PathResource(Paths.get(root.toString())));
+            contextHandler.setBaseResource(new PathResource(root.toString()));
             this.handler = handler;
         }
 
