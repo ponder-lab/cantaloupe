@@ -16,14 +16,17 @@ import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
+import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.security.Constraint;
 import org.eclipse.jetty.util.security.Password;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
+import org.eclipse.jetty.util.resource.PathResource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 
 /**
@@ -149,9 +152,11 @@ public final class Server {
         // If a custom handler has not been set, use a static file server.
         if (handler == null) {
             ResourceHandler handler = new ResourceHandler();
-            handler.setDirectoriesListed(false);
+            ContextHandler contextHandler = new ContextHandler();
+            contextHandler.setHandler(handler);
+            contextHandler.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false");
             handler.setAcceptRanges(isAcceptingRanges);
-            handler.setResourceBase(root.toString());
+            contextHandler.setBaseResource(new PathResource(Paths.get(root.toString())))
             this.handler = handler;
         }
 
