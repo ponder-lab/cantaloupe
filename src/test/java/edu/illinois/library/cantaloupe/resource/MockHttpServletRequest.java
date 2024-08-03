@@ -34,6 +34,11 @@ public class MockHttpServletRequest implements HttpServletRequest {
     private final Map<String, List<String>> headers = new HashMap<>();
 
     @Override
+    public String getProtocolRequestId() {
+        return null;
+    }
+
+    @Override
     public boolean authenticate(HttpServletResponse httpServletResponse) {
         return false;
     }
@@ -49,7 +54,7 @@ public class MockHttpServletRequest implements HttpServletRequest {
     }
 
     @Override
-    public Object getAttribute(String s) {
+    public Object getAttribute(String name) {
         return null;
     }
 
