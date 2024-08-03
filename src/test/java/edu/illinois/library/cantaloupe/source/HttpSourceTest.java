@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -400,7 +401,7 @@ abstract class HttpSourceTest extends AbstractSourceTest {
                                org.eclipse.jetty.server.Response response,
                                Callback callback) throws Exception {
                 response.getHeaders().put("Accept-Ranges", "bytes");
-                try(InputSTream is = Files.newInputStream(TestUtil.getImage(fixture))) {
+                try(InputStream is = Files.newInputStream(TestUtil.getImage(fixture))) {
                     byte[] buffer = new byte[8192];
                     int bytesRead;
                     while ((bytesRead = is.read(buffer)) != -1) {
