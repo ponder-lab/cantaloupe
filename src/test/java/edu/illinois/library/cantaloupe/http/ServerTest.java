@@ -46,7 +46,7 @@ public class ServerTest extends BaseTest {
         server.setAcceptingRanges(true);
         server.start();
 
-        Response response = client.send();
+        edu.illinois.library.cantaloupe.http.Response response = client.send();
         assertEquals("bytes", response.getHeaders().getFirstValue("Accept-Ranges"));
     }
 
@@ -55,7 +55,7 @@ public class ServerTest extends BaseTest {
         server.setAcceptingRanges(false);
         server.start();
 
-        Response response = client.send();
+        edu.illinois.library.cantaloupe.http.Response response = client.send();
         assertEquals(0, response.getHeaders().getAll("Accept-Ranges").size());
     }
 
@@ -75,7 +75,7 @@ public class ServerTest extends BaseTest {
         client.setUsername(user);
         client.setSecret(secret);
 
-        Response response = client.send();
+        edu.illinois.library.cantaloupe.http.Response response = client.send();
         assertEquals(200, response.getStatus());
     }
 
@@ -108,7 +108,7 @@ public class ServerTest extends BaseTest {
         server.setHandler(new DefaultHandler() {
             @Override
             public boolean handle(Request request,
-                               Response response,
+                               org.eclipse.jetty.server.Response response,
                                Callback callback) {
                 if (request.getHttpURI().getPath().startsWith(path)) {
                     response.setStatus(500);
@@ -133,7 +133,7 @@ public class ServerTest extends BaseTest {
         server.setHTTP2Enabled(false);
         server.start();
 
-        Response response = client.send();
+        edu.illinois.library.cantaloupe.http.Response response = client.send();
         assertEquals(200, response.getStatus());
         assertEquals(Transport.HTTP1_1, response.getTransport());
     }
@@ -146,7 +146,7 @@ public class ServerTest extends BaseTest {
 
         client.setTransport(Transport.HTTP2_0);
 
-        Response response = client.send();
+        edu.illinois.library.cantaloupe.http.Response response = client.send();
         assertEquals(200, response.getStatus());
         assertEquals(Transport.HTTP2_0, response.getTransport());
     }
@@ -162,7 +162,7 @@ public class ServerTest extends BaseTest {
 
         client.setTransport(Transport.HTTP1_1);
 
-        Response response = client.send();
+        edu.illinois.library.cantaloupe.http.Response response = client.send();
         assertEquals(200, response.getStatus());
         assertEquals(Transport.HTTP1_1, response.getTransport());
     }
@@ -178,7 +178,7 @@ public class ServerTest extends BaseTest {
 
         client.setTransport(Transport.HTTP2_0);
 
-        Response response = client.send();
+        edu.illinois.library.cantaloupe.http.Response response = client.send();
         assertEquals(200, response.getStatus());
         assertEquals(Transport.HTTP2_0, response.getTransport());
     }
