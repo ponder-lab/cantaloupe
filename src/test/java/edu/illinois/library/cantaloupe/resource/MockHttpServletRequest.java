@@ -38,25 +38,25 @@ public class MockHttpServletRequest implements HttpServletRequest {
         return null;
     }
 
-    @Override
-    public String getRequestId() {
-        return null;
-    }
+    // @Override
+    // public String getRequestId() {
+        // return null;
+    // }
 
-    @Override
-    public boolean authenticate(HttpServletResponse response) {
-        return false;
-    }
+    // @Override
+    // public boolean authenticate(HttpServletResponse response) {
+        // return false;
+    // }
 
-    @Override
-    public String changeSessionId() {
-        return null;
-    }
+    // @Override
+    // public String changeSessionId() {
+        // return null;
+    // }
 
-    @Override
-    public AsyncContext getAsyncContext() {
-        return null;
-    }
+    // @Override
+    // public AsyncContext getAsyncContext() {
+        // return null;
+    // }
 
     @Override
     public Object getAttribute(String name) {
@@ -185,10 +185,10 @@ public class MockHttpServletRequest implements HttpServletRequest {
         return 0;
     }
 
-    @Override
-    public Locale getLocale() {
-        return Locale.ENGLISH;
-    }
+    // @Override
+    // public Locale getLocale() {
+        // return Locale.ENGLISH;
+    // }
 
     @Override
     public Enumeration<Locale> getLocales() {
