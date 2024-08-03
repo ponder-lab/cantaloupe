@@ -10,7 +10,6 @@ import edu.illinois.library.cantaloupe.delegate.DelegateProxy;
 import edu.illinois.library.cantaloupe.test.TestUtil;
 import edu.illinois.library.cantaloupe.test.WebServer;
 import edu.illinois.library.cantaloupe.util.SocketUtils;
-import org.eclipse.jetty.io.Content;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.util.Callback;
@@ -401,7 +400,13 @@ abstract class HttpSourceTest extends AbstractSourceTest {
                                org.eclipse.jetty.server.Response response,
                                Callback callback) throws Exception {
                 response.getHeaders().put("Accept-Ranges", "bytes");
-                Content.Sink.copyFromPath(TestUtil.getImage(fixture), response, callback);
+                try(InputSTream is = Files.newInputStream(TestUtil.getImage(fixture))) {
+                    byte[] buffer = new byte[8192];
+                    int bytesRead;
+                    while ((bytesRead = is.read(buffer)) != -1) {
+                        response.write(ByteBuffer.wrap(buffer, 0, bytesRead), callback)
+                    }
+                }
                 return true;
             }
         });
