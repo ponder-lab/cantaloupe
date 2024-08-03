@@ -39,11 +39,10 @@ abstract class HttpSourceTest extends AbstractSourceTest {
         private int numHEADRequests, numGETRequests;
 
         @Override
-        public void handle(String target,
-                Request baseRequest,
-                HttpServletRequest request,
-                HttpServletResponse response) {
-            switch (request.getMethod().toUpperCase()) {
+        public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
+                switch (request.getMethod().toUpperCase()) {
                 case "HEAD":
                     numHEADRequests++;
                     break;
@@ -54,8 +53,9 @@ abstract class HttpSourceTest extends AbstractSourceTest {
                     throw new IllegalArgumentException(
                             "Unexpected method: " + request.getMethod());
             }
-            baseRequest.setHandled(true);
-        }
+                callback.succeeded();
+                return true;
+            }
 
     }
 
@@ -168,12 +168,12 @@ abstract class HttpSourceTest extends AbstractSourceTest {
             throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
                 response.setStatus(403);
-                baseRequest.setHandled(true);
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
@@ -243,12 +243,12 @@ abstract class HttpSourceTest extends AbstractSourceTest {
     void testStatWith403Response() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
                 response.setStatus(403);
-                baseRequest.setHandled(true);
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
@@ -266,12 +266,12 @@ abstract class HttpSourceTest extends AbstractSourceTest {
     void testStatWith500Response() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
                 response.setStatus(500);
-                baseRequest.setHandled(true);
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
@@ -308,10 +308,9 @@ abstract class HttpSourceTest extends AbstractSourceTest {
     void testStatSendsUserAgentHeader() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
                 String expected = String.format("%s/%s (%s/%s; java/%s; %s/%s)",
                         HttpSource.class.getSimpleName(),
                         Application.getVersion(),
@@ -320,8 +319,9 @@ abstract class HttpSourceTest extends AbstractSourceTest {
                         System.getProperty("java.version"),
                         System.getProperty("os.name"),
                         System.getProperty("os.version"));
-                assertEquals(expected, baseRequest.getHeader("User-Agent"));
-                baseRequest.setHandled(true);
+                assertEquals(expected, baseRequest.getHeaders().get("User-Agent"));
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
@@ -335,12 +335,12 @@ abstract class HttpSourceTest extends AbstractSourceTest {
 
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
-                assertEquals("yes", request.getHeader("X-Custom"));
-                baseRequest.setHandled(true);
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
+                assertEquals("yes", request.getHeaders().get("X-Custom"));
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
@@ -395,14 +395,14 @@ abstract class HttpSourceTest extends AbstractSourceTest {
         instance.setIdentifier(new Identifier(fixture));
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) throws IOException {
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
                 response.setHeader("Accept-Ranges", "bytes");
                 try (OutputStream os = response.getOutputStream()) {
                     Files.copy(TestUtil.getImage(fixture), os);
                 }
+                return true;
             }
         });
         server.start();
