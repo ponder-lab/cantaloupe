@@ -108,14 +108,14 @@ public class ServerTest extends BaseTest {
 
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
-                if (baseRequest.getPathInfo().startsWith(path)) {
+            public void handle(Request request,
+                               Response response,
+                               Callback callback) {
+                if (request.getHttpURI().getPath().startsWith(path)) {
                     response.setStatus(500);
                 }
-                baseRequest.setHandled(true);
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
