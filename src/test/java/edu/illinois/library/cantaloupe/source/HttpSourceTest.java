@@ -405,7 +405,8 @@ abstract class HttpSourceTest extends AbstractSourceTest {
                     byte[] buffer = new byte[8192];
                     int bytesRead;
                     while ((bytesRead = is.read(buffer)) != -1) {
-                        response.write(ByteBuffer.wrap(buffer, 0, bytesRead), callback);
+                        boolean isLast = is.available() == 0;
+                        response.write(isLast, ByteBuffer.wrap(buffer, 0, bytesRead), callback);
                     }
                 }
                 return true;
