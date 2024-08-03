@@ -250,11 +250,6 @@ public class MockHttpServletRequest implements HttpServletRequest {
     }
 
     @Override
-    public String getRealPath(String s) {
-        return null;
-    }
-
-    @Override
     public String getRemoteAddr() {
         return remoteAddr;
     }
@@ -310,6 +305,11 @@ public class MockHttpServletRequest implements HttpServletRequest {
     }
 
     @Override
+    public ServletConnection getServletConnection() {
+        return null;
+    }
+
+    @Override
     public ServletContext getServletContext() {
         return null;
     }
@@ -346,11 +346,6 @@ public class MockHttpServletRequest implements HttpServletRequest {
 
     @Override
     public boolean isRequestedSessionIdFromCookie() {
-        return false;
-    }
-
-    @Override
-    public boolean isRequestedSessionIdFromUrl() {
         return false;
     }
 
