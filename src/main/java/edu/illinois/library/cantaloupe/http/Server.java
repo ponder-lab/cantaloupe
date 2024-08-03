@@ -156,7 +156,7 @@ public final class Server {
             contextHandler.setHandler(handler);
             contextHandler.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false");
             handler.setAcceptRanges(isAcceptingRanges);
-            contextHandler.setBaseResource(new PathResource(root.toUri()));
+            contextHandler.setBaseResource(new PathResource(root));
             this.handler = handler;
         }
 
