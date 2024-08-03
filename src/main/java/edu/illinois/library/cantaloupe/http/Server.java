@@ -169,10 +169,7 @@ public final class Server {
             loginService.setUserStore(userStore);
             server.addBean(loginService);
 
-            Constraint constraint = new Constraint();
-            constraint.setName("auth");
-            constraint.setAuthenticate(true);
-            constraint.setRoles(roles);
+            Constraint constraint = Constraint.from("auth", Constraint.Authorization.KNOWN_ROLE, roles);
 
             ConstraintMapping mapping = new ConstraintMapping();
             mapping.setPathSpec("/*");
