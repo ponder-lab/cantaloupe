@@ -21,7 +21,7 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.security.Constraint;
 import org.eclipse.jetty.util.security.Password;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.eclipse.jetty.util.resource.PathResource;
+import org.eclipse.jetty.util.resource.ResourceFactory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -156,7 +156,7 @@ public final class Server {
             contextHandler.setHandler(handler);
             contextHandler.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false");
             handler.setAcceptRanges(isAcceptingRanges);
-            contextHandler.setBaseResource(new PathResource(root.toUri()));
+            contextHandler.setBaseResource(ResourceFactory.root().newResource(Paths.get(root.toString())));
             this.handler = handler;
         }
 
