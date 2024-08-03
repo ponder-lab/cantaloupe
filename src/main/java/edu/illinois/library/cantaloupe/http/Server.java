@@ -17,8 +17,8 @@ import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.ResourceHandler;
-import org.eclipse.jetty.ee10.servlet.security.Constraint;
-import org.eclipse.jetty.ee10.servlet.security.Password;
+import org.eclipse.jetty.security.Constraint;
+import org.eclipse.jetty.util.security.Password;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 import java.net.URI;
