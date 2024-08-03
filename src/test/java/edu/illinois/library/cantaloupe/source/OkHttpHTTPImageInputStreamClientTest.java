@@ -37,13 +37,13 @@ public class OkHttpHTTPImageInputStreamClientTest extends BaseTest {
     void sendHEADRequest() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
-                assertEquals("HEAD", baseRequest.getMethod());
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
+                assertEquals("HEAD", request.getMethod());
                 response.setStatus(200);
-                baseRequest.setHandled(true);
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
@@ -60,13 +60,13 @@ public class OkHttpHTTPImageInputStreamClientTest extends BaseTest {
     void sendHEADRequestSendsRequestInfoCredentials() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
                 assertEquals("Basic dXNlcjpzZWNyZXQ=",
-                        baseRequest.getHeader("Authorization"));
-                baseRequest.setHandled(true);
+                        request.getHeaders().get("Authorization"));
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
@@ -85,12 +85,12 @@ public class OkHttpHTTPImageInputStreamClientTest extends BaseTest {
     void sendHEADRequestSendsRequestInfoHeaders() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
-                assertEquals("yes", baseRequest.getHeader("X-Cats"));
-                baseRequest.setHandled(true);
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
+                assertEquals("yes", request.getHeaders().get("X-Cats"));
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
@@ -125,14 +125,15 @@ public class OkHttpHTTPImageInputStreamClientTest extends BaseTest {
     void sendGETRequestSendsRequestInfoCredentials() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
                 assertEquals("Basic dXNlcjpzZWNyZXQ=",
-                        baseRequest.getHeader("Authorization"));
-                baseRequest.setHandled(true);
+                        request.getHeaders().get("Authorization"));
+                callback.succeeded();
+                return true;
             }
+            
         });
         server.start();
 
@@ -150,12 +151,12 @@ public class OkHttpHTTPImageInputStreamClientTest extends BaseTest {
     void sendGETRequestSendsRequestInfoHeaders() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
-                assertEquals("yes", baseRequest.getHeader("X-Cats"));
-                baseRequest.setHandled(true);
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
+                assertEquals("yes", request.getHeaders().get("X-Cats"));
+                callback.succeeded();
+                return true;
             }
         });
         server.start();
