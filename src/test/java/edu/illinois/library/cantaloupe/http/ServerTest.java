@@ -4,6 +4,7 @@ import edu.illinois.library.cantaloupe.test.BaseTest;
 import edu.illinois.library.cantaloupe.test.TestUtil;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.util.Callback;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -108,7 +109,7 @@ public class ServerTest extends BaseTest {
 
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(Request request,
+            public boolean handle(Request request,
                                Response response,
                                Callback callback) {
                 if (request.getHttpURI().getPath().startsWith(path)) {
