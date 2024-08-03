@@ -234,7 +234,7 @@
         N.B.: ALPN support is in a different module. -->
         <dependency>
             <groupId>org.eclipse.jetty.http2</groupId>
-            <artifactId>http2-server</artifactId>
+            <artifactId>jetty-http2-server</artifactId>
             <version>${jetty.version}</version>
         </dependency>
         <!-- Enables support for ALPN in Jetty server.
