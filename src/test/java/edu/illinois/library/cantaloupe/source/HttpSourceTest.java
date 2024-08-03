@@ -12,6 +12,7 @@ import edu.illinois.library.cantaloupe.test.WebServer;
 import edu.illinois.library.cantaloupe.util.SocketUtils;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.util.Callback;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
