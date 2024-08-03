@@ -320,7 +320,7 @@ abstract class HttpSourceTest extends AbstractSourceTest {
                         System.getProperty("java.version"),
                         System.getProperty("os.name"),
                         System.getProperty("os.version"));
-                assertEquals(expected, baseRequest.getHeaders().get("User-Agent"));
+                assertEquals(expected, request.getHeaders().get("User-Agent"));
                 callback.succeeded();
                 return true;
             }
@@ -399,9 +399,9 @@ abstract class HttpSourceTest extends AbstractSourceTest {
             public boolean handle(Request request,
                                org.eclipse.jetty.server.Response response,
                                Callback callback) {
-                response.setHeader("Accept-Ranges", "bytes");
-                try (OutputStream os = response.getOutputStream()) {
-                    Files.copy(TestUtil.getImage(fixture), os);
+                response.getHeaders().put("Accept-Ranges", "bytes");
+                try {
+                    Content.Sink.copyFromPath(TestUtil.getImage(fixture), response, callback);
                 }
                 return true;
             }
