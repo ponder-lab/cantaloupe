@@ -107,7 +107,7 @@ public class ServerTest extends BaseTest {
     void testHandler() throws Exception {
         final String path = "/unauthorized";
 
-        server.setHandler(new DefaultHandler() {
+        server.setHandler(new AbstractHandler() {
             @Override
             public boolean handle(Request request,
                                Response response,
