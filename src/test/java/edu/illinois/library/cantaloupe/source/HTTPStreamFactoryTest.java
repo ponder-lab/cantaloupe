@@ -99,12 +99,11 @@ public class HTTPStreamFactoryTest extends BaseTest {
     void newInputStreamSendsCustomHeaders() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
                 assertEquals("yes", request.getHeader("X-Custom"));
-                baseRequest.setHandled(true);
+                callback.success();
             }
         });
         server.start();
