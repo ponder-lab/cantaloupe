@@ -2,8 +2,8 @@ package edu.illinois.library.cantaloupe.test;
 
 import edu.illinois.library.cantaloupe.http.Server;
 import org.eclipse.jetty.server.Handler;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletHandler;
 
 import java.net.URI;
 import java.nio.file.Path;
