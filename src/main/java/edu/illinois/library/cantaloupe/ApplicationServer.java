@@ -22,7 +22,7 @@ import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.servlet.ListenerHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.eclipse.jetty.util.thread.QueuedThreadPool;
+import org.eclipse.jetty.util.thread.VirtualThreadPool;
 
 import java.lang.management.ManagementFactory;
 
@@ -128,8 +128,7 @@ public class ApplicationServer {
         context.getServletHandler().addListener(new ListenerHolder(ApplicationContextListener.class));
         context.getServletHandler().addListener(new ListenerHolder(IIOProviderContextListener.class));
 
-        QueuedThreadPool pool = new QueuedThreadPool(
-                getMaxThreads(), getMinThreads());
+        VirtualThreadPool pool = new VirtualThreadPool();
 
         server = new Server(pool);
         context.setServer(server);
