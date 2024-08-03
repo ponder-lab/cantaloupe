@@ -39,14 +39,16 @@ public class MockHttpServletRequest implements HttpServletRequest {
     }
 
     @Override
+    public String getRequestId() {
+        return null;
+    }
+
+    @Override
     public boolean authenticate(HttpServletResponse httpServletResponse) {
         return false;
     }
 
-    @Override
-    public String changeSessionId() {
-        return null;
-    }
+    // changeSessionId
 
     @Override
     public AsyncContext getAsyncContext() {
