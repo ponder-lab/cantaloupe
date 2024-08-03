@@ -104,7 +104,7 @@ public class HTTPStreamFactoryTest extends BaseTest {
                                org.eclipse.jetty.server.Response response,
                                Callback callback) {
                 assertEquals("yes", request.getHeaders().get("X-Custom"));
-                callback.success();
+                callback.succeeded();
             }
         });
         server.start();
@@ -188,12 +188,11 @@ public class HTTPStreamFactoryTest extends BaseTest {
     void newSeekableStreamSendsCustomHeaders() throws Exception {
         server.setHandler(new DefaultHandler() {
             @Override
-            public void handle(String target,
-                               Request baseRequest,
-                               HttpServletRequest request,
-                               HttpServletResponse response) {
-                assertEquals("yes", request.getHeader("X-Custom"));
-                baseRequest.setHandled(true);
+            public boolean handle(Request request,
+                               org.eclipse.jetty.server.Response response,
+                               Callback callback) {
+                assertEquals("yes", request.getHeaders().get("X-Custom"));
+                callback.succeeded();
             }
         });
         server.start();
