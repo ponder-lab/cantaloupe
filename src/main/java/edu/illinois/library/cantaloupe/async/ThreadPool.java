@@ -31,7 +31,7 @@ public final class ThreadPool {
         abstract String getThreadNamePrefix();
 
         public Thread newThread(Runnable runnable) {
-            Thread thread = Thread.ofVirtual().name(getThreadNamePrefix() + "-", getThreadID()).unstarted(runnable);
+            Thread thread = Thread.ofVirtual().name(getThreadNamePrefix() + "-", Long.parseLong(getThreadID())).unstarted(runnable);
             return thread;
         }
     }
