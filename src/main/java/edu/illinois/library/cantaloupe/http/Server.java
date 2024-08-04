@@ -73,6 +73,7 @@ public final class Server {
 
     private void initializeServer() {
         server = new org.eclipse.jetty.server.Server();
+        server.setAttribute("org.eclipse.jetty.server.URICompliance", "LEGACY");
 
         ServerConnector connector;
         HttpConfiguration config = new HttpConfiguration();
