@@ -78,6 +78,7 @@ public final class Server {
         ServerConnector connector;
         HttpConfiguration config = new HttpConfiguration();
         config.setUriCompliance(UriCompliance.LEGACY);
+        System.out.println("UriCompliance.LEGACY set");
 
         HttpConnectionFactory http1 = new HttpConnectionFactory(config);
         HTTP2CServerConnectionFactory http2c =
