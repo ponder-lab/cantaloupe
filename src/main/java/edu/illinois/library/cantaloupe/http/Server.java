@@ -154,7 +154,7 @@ public final class Server {
 
         // If a custom handler has not been set, use a static file server.
         if (handler == null) {
-            System.out.println("Refactoring in Server hit");
+            System.out.println("Refactoring (handler) in Server hit");
             ResourceHandler handler = new ResourceHandler();
             ServletContextHandler contextHandler = new ServletContextHandler();
             contextHandler.setHandler(handler);
@@ -172,7 +172,7 @@ public final class Server {
             userStore.addUser(authUser, new Password(authSecret), roles);
             loginService.setUserStore(userStore);
             server.addBean(loginService);
-
+            System.out.println("Refactoring (constraint) in Server hit");
             Constraint constraint = Constraint.from("auth", Constraint.Authorization.KNOWN_ROLE, roles);
 
             ConstraintMapping mapping = new ConstraintMapping();
