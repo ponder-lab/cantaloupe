@@ -98,6 +98,7 @@ public class HTTPStreamFactoryTest extends BaseTest {
 
     @Test
     void newInputStreamSendsCustomHeaders() throws Exception {
+        System.out.println("Refactoring 1 in HTTPStreamFactoryTest hit");
         server.setHandler(new DefaultHandler() {
             @Override
             public boolean handle(Request request,
@@ -187,6 +188,7 @@ public class HTTPStreamFactoryTest extends BaseTest {
 
     @Test
     void newSeekableStreamSendsCustomHeaders() throws Exception {
+        System.out.println("Refactoring 2 in HTTPStreamFactoryTest hit");
         server.setHandler(new DefaultHandler() {
             @Override
             public boolean handle(Request request,
