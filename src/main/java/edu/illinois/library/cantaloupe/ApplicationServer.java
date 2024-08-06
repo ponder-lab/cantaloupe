@@ -128,6 +128,7 @@ public class ApplicationServer {
         context.getServletHandler().addListener(new ListenerHolder(ApplicationContextListener.class));
         context.getServletHandler().addListener(new ListenerHolder(IIOProviderContextListener.class));
 
+        System.out.println("Refactoring in ApplicationServer hit");
         VirtualThreadPool pool = new VirtualThreadPool();
 
         server = new Server(pool);
