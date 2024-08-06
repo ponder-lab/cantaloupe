@@ -148,12 +148,11 @@ public final class Server {
             connector.setPort(httpsPort);
             server.addConnector(connector);
         }
-
+        ServletContextHandler contextHandler = new ServletContextHandler();
         // If a custom handler has not been set, use a static file server.
         if (handler == null) {
             System.out.println("Refactoring (handler) in Server hit");
             ResourceHandler handler = new ResourceHandler();
-            ServletContextHandler contextHandler = new ServletContextHandler();
             contextHandler.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false");
             handler.setAcceptRanges(isAcceptingRanges);
             contextHandler.setBaseResource(ResourceFactory.root().newResource(Paths.get(root.toString())));
