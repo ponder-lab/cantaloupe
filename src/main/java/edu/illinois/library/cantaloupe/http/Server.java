@@ -154,6 +154,7 @@ public final class Server {
 
         // If a custom handler has not been set, use a static file server.
         if (handler == null) {
+            System.out.println("Refactoring in Server hit");
             ResourceHandler handler = new ResourceHandler();
             ServletContextHandler contextHandler = new ServletContextHandler();
             contextHandler.setHandler(handler);
