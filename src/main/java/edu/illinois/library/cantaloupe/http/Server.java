@@ -170,7 +170,7 @@ public final class Server {
             loginService.setUserStore(userStore);
             server.addBean(loginService);
             System.out.println("Refactoring (constraint) in Server hit");
-            Constraint constraint = Constraint.from("auth", Constraint.Authorization.KNOWN_ROLE, roles);
+            Constraint constraint = Constraint.from("auth", Constraint.Authorization.SPECIFIC_ROLE, roles);
 
             ConstraintMapping mapping = new ConstraintMapping();
             mapping.setPathSpec("/*");
