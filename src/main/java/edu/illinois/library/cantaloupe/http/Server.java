@@ -154,12 +154,13 @@ public final class Server {
             System.out.println("Refactoring (handler) in Server hit");
             ResourceHandler handler = new ResourceHandler();
             ServletContextHandler contextHandler = new ServletContextHandler();
-            contextHandler.setHandler(handler);
             contextHandler.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false");
             handler.setAcceptRanges(isAcceptingRanges);
             contextHandler.setBaseResource(ResourceFactory.root().newResource(Paths.get(root.toString())));
             this.handler = handler;
         }
+
+        contextHandler.setHandler(handler);
 
         if (isBasicAuthEnabled) {
             final String[] roles = new String[] { "user" };
