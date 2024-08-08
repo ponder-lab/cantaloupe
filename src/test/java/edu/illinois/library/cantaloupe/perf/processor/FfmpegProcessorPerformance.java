@@ -18,6 +18,7 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -37,6 +38,9 @@ import static edu.illinois.library.cantaloupe.test.PerformanceTestConstants.*;
 public class FfmpegProcessorPerformance {
 
     private FileProcessor processor;
+    
+    @Param({"10", "50", "100", "500", "1000", "5000"})
+    private int threads;
 
     @Setup
     public void setUp() throws Exception {
@@ -52,62 +56,80 @@ public class FfmpegProcessorPerformance {
 
     @Benchmark
     public void processWithAVI() throws Exception {
-        processor.setSourceFormat(Format.get("avi"));
-        processor.setSourceFile(TestUtil.getImage("avi"));
-        processor.process(
-                OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
-                Info.builder().withSize(640, 360).build(),
-                OutputStream.nullOutputStream());
+    	for (int i=0; i<threads; i++){
+    		System.out.println("i=" + i);
+        	processor.setSourceFormat(Format.get("avi"));
+        	processor.setSourceFile(TestUtil.getImage("avi"));
+        	processor.process(
+                	OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
+                	Info.builder().withSize(640, 360).build(),
+                	OutputStream.nullOutputStream());
+        }
     }
 
     @Benchmark
     public void processWithFLV() throws Exception {
-        processor.setSourceFormat(Format.get("flv"));
-        processor.setSourceFile(TestUtil.getImage("flv"));
-        processor.process(
-                OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
-                Info.builder().withSize(640, 360).build(),
-                OutputStream.nullOutputStream());
+   	for (int i=0; i<threads; i++){
+   		System.out.println("i=" + i);
+        	processor.setSourceFormat(Format.get("flv"));
+        	processor.setSourceFile(TestUtil.getImage("flv"));
+        	processor.process(
+                	OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
+                	Info.builder().withSize(640, 360).build(),
+                	OutputStream.nullOutputStream());
+	}
     }
 
     @Benchmark
     public void processWithMOV() throws Exception {
-        processor.setSourceFormat(Format.get("mov"));
-        processor.setSourceFile(TestUtil.getImage("mov"));
-        processor.process(
-                OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
-                Info.builder().withSize(640, 360).build(),
-                OutputStream.nullOutputStream());
+    	for (int i=0; i<threads; i++){
+    		System.out.println("i=" + i);
+        	processor.setSourceFormat(Format.get("mov"));
+        	processor.setSourceFile(TestUtil.getImage("mov"));
+        	processor.process(
+                	OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
+                	Info.builder().withSize(640, 360).build(),
+                	OutputStream.nullOutputStream());
+        }
     }
 
     @Benchmark
     public void processWithMP4() throws Exception {
-        processor.setSourceFormat(Format.get("mp4"));
-        processor.setSourceFile(TestUtil.getImage("mp4"));
-        processor.process(
-                OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
-                Info.builder().withSize(640, 360).build(),
-                OutputStream.nullOutputStream());
+    	for (int i=0; i<threads; i++){
+    		System.out.println("i=" + i);
+        	processor.setSourceFormat(Format.get("mp4"));
+        	processor.setSourceFile(TestUtil.getImage("mp4"));
+        	processor.process(
+                	OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
+                	Info.builder().withSize(640, 360).build(),
+                	OutputStream.nullOutputStream());
+        }
     }
 
     @Benchmark
     public void processWithMPG() throws Exception {
-        processor.setSourceFormat(Format.get("mpg"));
-        processor.setSourceFile(TestUtil.getImage("mpg"));
-        processor.process(
-                OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
-                Info.builder().withSize(640, 360).build(),
-                OutputStream.nullOutputStream());
+    	for (int i=0; i<threads; i++){
+    		System.out.println("i=" + i);
+        	processor.setSourceFormat(Format.get("mpg"));
+        	processor.setSourceFile(TestUtil.getImage("mpg"));
+        	processor.process(
+	        	OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
+                	Info.builder().withSize(640, 360).build(),
+                	OutputStream.nullOutputStream());
+        }
     }
 
     @Benchmark
     public void processWithWebM() throws Exception {
-        processor.setSourceFormat(Format.get("webm"));
-        processor.setSourceFile(TestUtil.getImage("webm"));
-        processor.process(
-                OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
-                Info.builder().withSize(640, 360).build(),
-                OutputStream.nullOutputStream());
+    	for (int i=0; i<threads; i++){
+    		System.out.println("i=" + i);
+        	processor.setSourceFormat(Format.get("webm"));
+        	processor.setSourceFile(TestUtil.getImage("webm"));
+        	processor.process(
+                	OperationList.builder().withOperations(new Encode(Format.get("png"))).build(),
+                	Info.builder().withSize(640, 360).build(),
+                	OutputStream.nullOutputStream());
+        }
     }
 
     @Benchmark
