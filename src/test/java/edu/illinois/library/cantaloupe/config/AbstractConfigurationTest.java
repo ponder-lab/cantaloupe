@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractConfigurationTest extends BaseTest {
 
-    private static final int NUM_CONCURRENT_THREADS = 1000;
-
     abstract protected Configuration getInstance();
 
     /* clear() */
@@ -27,7 +25,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testClearConcurrently() throws Exception {
+    void testClearConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
 
@@ -37,7 +35,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.setProperty(key, "dogs");
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* clearProperty(Key) */
@@ -65,7 +63,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testClearPropertyWithStringConcurrently() throws Exception {
+    void testClearPropertyWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
 
@@ -75,7 +73,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.clearProperty(key);
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getBoolean(Key) */
@@ -131,7 +129,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testGetBooleanWithStringConcurrently() throws Exception {
+    void testGetBooleanWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
 
@@ -141,7 +139,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.getBoolean(key);
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getBoolean(Key, boolean) */
@@ -266,7 +264,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testGetDoubleWithStringConcurrently() throws Exception {
+    void testGetDoubleWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
 
@@ -276,7 +274,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.getDouble(key);
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getDouble(Key, double) */
@@ -384,7 +382,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testGetFloatWithStringConcurrently() throws Exception {
+    void testGetFloatWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
 
@@ -394,7 +392,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.getFloat(key);
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getFloat(Key, float) */
@@ -500,7 +498,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testGetIntWithStringConcurrently() throws Exception {
+    void testGetIntWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
 
@@ -510,7 +508,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.getInt(key);
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getInt(Key, int) */
@@ -576,7 +574,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testGetKeysConcurrently() throws Exception {
+    void testGetKeysConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final AtomicInteger id = new AtomicInteger();
 
@@ -586,7 +584,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.getKeys();
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getLong(Key) */
@@ -642,7 +640,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testGetLongWithStringConcurrently() throws Exception {
+    void testGetLongWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
 
@@ -652,7 +650,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.getLong(key);
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getLong(Key, int) */
@@ -748,7 +746,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testGetLongBytesWithStringConcurrently() throws Exception {
+    void testGetLongBytesWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
         instance.setProperty(key, "32234");
@@ -759,7 +757,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.getLongBytes(key);
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getLongBytes(Key, int) */
@@ -843,7 +841,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testGetPropertyWithStringConcurrently() throws Exception {
+    void testGetPropertyWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
 
@@ -853,7 +851,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.getProperty(key);
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getString(Key) */
@@ -887,7 +885,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
-    void testGetStringWithStringConcurrently() throws Exception {
+    void testGetStringWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
 
@@ -897,7 +895,7 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }, () -> {
             instance.getString(key);
             return null;
-        }).numThreads(NUM_CONCURRENT_THREADS).run();
+        }).numThreads(numThreads).run();
     }
 
     /* getString(Key, String) */
