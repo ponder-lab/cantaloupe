@@ -189,7 +189,7 @@ abstract class AbstractCacheTest extends BaseTest {
     }
 
     @Test
-    void testNewDerivativeImageInputStreamConcurrently(int numThreads) throws Exception {
+    void testNewDerivativeImageInputStreamConcurrently() throws Exception {
         final DerivativeCache instance = newInstance();
         final OperationList ops = OperationList.builder()
                 .withIdentifier(new Identifier("cats"))
@@ -213,7 +213,7 @@ abstract class AbstractCacheTest extends BaseTest {
                 }
             }
             return null;
-        }, numThreads).run();
+        }).run();
     }
 
     /* newDerivativeImageOutputStream() */
