@@ -560,7 +560,7 @@ abstract class AbstractCacheTest extends BaseTest {
      * DerivativeCache#getInfo(Identifier)} don't conflict.
      */
     @Test
-    void testPutWithInfoConcurrently() throws Exception {
+    void testPutWithInfoConcurrently(int numThreads) throws Exception {
         final DerivativeCache instance = newInstance();
         final Identifier identifier    = new Identifier("monkeys");
         final Info info                = new Info();
@@ -574,7 +574,7 @@ abstract class AbstractCacheTest extends BaseTest {
                 fail();
             }
             return null;
-        }).run();
+        }, numThreads).run();
     }
 
     @Test
@@ -611,7 +611,7 @@ abstract class AbstractCacheTest extends BaseTest {
      * DerivativeCache#getInfo(Identifier)} don't conflict.
      */
     @Test
-    void testPutWithStringConcurrently() throws Exception {
+    void testPutWithStringConcurrently(int numThreads) throws Exception {
         final DerivativeCache instance = newInstance();
         final Identifier identifier    = new Identifier("monkeys");
         final Info info                = new Info();
@@ -626,7 +626,7 @@ abstract class AbstractCacheTest extends BaseTest {
                 fail();
             }
             return null;
-        }).run();
+        }, numThreads).run();
     }
 
 }
