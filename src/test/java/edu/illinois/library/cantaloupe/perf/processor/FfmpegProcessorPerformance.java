@@ -57,7 +57,6 @@ public class FfmpegProcessorPerformance {
     @Benchmark
     public void processWithAVI() throws Exception {
     	for (int i=0; i<threads; i++){
-    		System.out.println("i=" + i);
         	processor.setSourceFormat(Format.get("avi"));
         	processor.setSourceFile(TestUtil.getImage("avi"));
         	processor.process(
@@ -70,7 +69,6 @@ public class FfmpegProcessorPerformance {
     @Benchmark
     public void processWithFLV() throws Exception {
    	for (int i=0; i<threads; i++){
-   		System.out.println("i=" + i);
         	processor.setSourceFormat(Format.get("flv"));
         	processor.setSourceFile(TestUtil.getImage("flv"));
         	processor.process(
@@ -83,7 +81,6 @@ public class FfmpegProcessorPerformance {
     @Benchmark
     public void processWithMOV() throws Exception {
     	for (int i=0; i<threads; i++){
-    		System.out.println("i=" + i);
         	processor.setSourceFormat(Format.get("mov"));
         	processor.setSourceFile(TestUtil.getImage("mov"));
         	processor.process(
@@ -96,7 +93,6 @@ public class FfmpegProcessorPerformance {
     @Benchmark
     public void processWithMP4() throws Exception {
     	for (int i=0; i<threads; i++){
-    		System.out.println("i=" + i);
         	processor.setSourceFormat(Format.get("mp4"));
         	processor.setSourceFile(TestUtil.getImage("mp4"));
         	processor.process(
@@ -109,7 +105,6 @@ public class FfmpegProcessorPerformance {
     @Benchmark
     public void processWithMPG() throws Exception {
     	for (int i=0; i<threads; i++){
-    		System.out.println("i=" + i);
         	processor.setSourceFormat(Format.get("mpg"));
         	processor.setSourceFile(TestUtil.getImage("mpg"));
         	processor.process(
@@ -122,7 +117,6 @@ public class FfmpegProcessorPerformance {
     @Benchmark
     public void processWithWebM() throws Exception {
     	for (int i=0; i<threads; i++){
-    		System.out.println("i=" + i);
         	processor.setSourceFormat(Format.get("webm"));
         	processor.setSourceFile(TestUtil.getImage("webm"));
         	processor.process(
