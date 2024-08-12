@@ -425,6 +425,16 @@ public class FilesystemCacheTest extends AbstractCacheTest {
         assumeFalse(SystemUtils.IS_OS_WINDOWS); // TODO: this fails in Windows CI with a flurry of AccessDeniedExceptions
         super.testNewDerivativeImageInputStreamConcurrently(numThreads);
     }
+    
+    @Benchmark
+    public void testPutWithInfoConcurrently() throws Exception {
+        super.testPutWithInfoConcurrently(numThreads);
+    }
+    
+    @Benchmark
+    public void testPutWithStringConcurrently() throws Exception {
+        super.testPutWithStringConcurrently(numThreads);
+    }
 
     /* newSourceImageOutputStream(Identifier) */
 
