@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractConfigurationTest extends BaseTest {
 
+    private static final int NUM_CONCURRENT_THREADS = 1000;
+
     abstract protected Configuration getInstance();
 
     /* clear() */
