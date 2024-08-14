@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractConfigurationTest extends BaseTest {
 
+    private static final int NUM_CONCURRENT_THREADS = 1000;
+    
     abstract protected Configuration getInstance();
 
     /* clear() */
@@ -25,6 +27,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testClearConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -63,6 +67,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testClearPropertyWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -129,6 +135,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetBooleanWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -264,6 +272,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetDoubleWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -382,6 +392,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetFloatWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -498,6 +510,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetIntWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -574,6 +588,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetKeysConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final AtomicInteger id = new AtomicInteger();
@@ -640,6 +656,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetLongWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -746,6 +764,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetLongBytesWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -841,6 +861,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetPropertyWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -885,6 +907,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetStringWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
