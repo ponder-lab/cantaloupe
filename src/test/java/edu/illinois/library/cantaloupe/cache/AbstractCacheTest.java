@@ -190,7 +190,6 @@ abstract class AbstractCacheTest extends BaseTest {
         assertNotExists(instance, ops);
     }
 
-    @Test
     @ParameterizedTest
     @ValueSource(ints = {500})
     void testNewDerivativeImageInputStreamConcurrently(int numThreads) throws Exception {
@@ -563,7 +562,6 @@ abstract class AbstractCacheTest extends BaseTest {
      * DerivativeCache#put(Identifier, Info)} and {@link
      * DerivativeCache#getInfo(Identifier)} don't conflict.
      */
-    @Test
     @ParameterizedTest
     @ValueSource(ints = {500})
     void testPutWithInfoConcurrently(int numThreads) throws Exception {
@@ -616,7 +614,6 @@ abstract class AbstractCacheTest extends BaseTest {
      * DerivativeCache#put(Identifier, String)} and {@link
      * DerivativeCache#getInfo(Identifier)} don't conflict.
      */
-    @Test
     @ParameterizedTest
     @ValueSource(ints = {500})
     void testPutWithStringConcurrently(int numThreads) throws Exception {
