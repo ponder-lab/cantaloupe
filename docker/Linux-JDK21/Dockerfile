@@ -68,4 +68,3 @@ COPY --chown=cantaloupe docker/Linux-JDK11/image_files/test.properties test.prop
 COPY --chown=cantaloupe ./src src
 
 ENTRYPOINT mvn --batch-mode test -Pfreedeps
-ENTRYPOINT mvn --batch-mode test -Pbenchmark
