@@ -28,7 +28,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         assertNull(instance.getString("cats"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testClearConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -66,7 +67,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         assertNotNull(instance.getString("dogs"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testClearPropertyWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -132,7 +134,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
                 () -> instance.getBoolean("test3"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetBooleanWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -267,7 +270,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
                 () -> instance.getDouble("test3"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetDoubleWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -385,7 +389,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
                 () -> instance.getFloat("test3"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetFloatWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -501,7 +506,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
                 () -> instance.getInt("test3"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetIntWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -577,7 +583,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         }
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetKeysConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final AtomicInteger id = new AtomicInteger();
@@ -643,7 +650,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
                 () -> instance.getLong("test3"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetLongWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -749,7 +757,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
                 () -> instance.getLongBytes("test3"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetLongBytesWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -844,7 +853,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         assertNull(instance.getProperty("cats"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetPropertyWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
@@ -888,7 +898,8 @@ public abstract class AbstractConfigurationTest extends BaseTest {
         assertNull(instance.getString("bogus"));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {NUM_CONCURRENT_THREADS})
     void testGetStringWithStringConcurrently(int numThreads) throws Exception {
         final Configuration instance = getInstance();
         final String key = "cats";
