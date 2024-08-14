@@ -189,6 +189,8 @@ abstract class AbstractCacheTest extends BaseTest {
     }
 
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {500})
     void testNewDerivativeImageInputStreamConcurrently(int numThreads) throws Exception {
         final DerivativeCache instance = newInstance();
         final OperationList ops = OperationList.builder()
@@ -560,6 +562,8 @@ abstract class AbstractCacheTest extends BaseTest {
      * DerivativeCache#getInfo(Identifier)} don't conflict.
      */
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {500})
     void testPutWithInfoConcurrently(int numThreads) throws Exception {
         final DerivativeCache instance = newInstance();
         final Identifier identifier    = new Identifier("monkeys");
@@ -611,6 +615,8 @@ abstract class AbstractCacheTest extends BaseTest {
      * DerivativeCache#getInfo(Identifier)} don't conflict.
      */
     @Test
+    @ParameterizedTest
+    @ValueSource(ints = {500})
     void testPutWithStringConcurrently(int numThreads) throws Exception {
         final DerivativeCache instance = newInstance();
         final Identifier identifier    = new Identifier("monkeys");
