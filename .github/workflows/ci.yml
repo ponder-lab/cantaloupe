@@ -5,7 +5,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-2022]
+        os: [ubuntu-latest, windows-2022-20230814]
         java: [jdk21]
       fail-fast: false
     steps:
@@ -15,7 +15,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest' && matrix.java == 'jdk21'
         run: docker compose -f docker/Linux-JDK21/docker-compose.yml up --build --exit-code-from cantaloupe
       - name: Test in Windows JDK 21
-        if: matrix.os == 'windows-2022' && matrix.java == 'jdk21'
+        if: matrix.os == 'windows-2022-20230814' && matrix.java == 'jdk21'
         run: docker-compose -f docker/Windows-JDK21/docker-compose.yml up --build --exit-code-from cantaloupe
       # TODO: Windows+GraalVM
 
