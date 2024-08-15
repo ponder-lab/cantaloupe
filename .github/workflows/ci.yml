@@ -16,6 +16,6 @@ jobs:
         run: docker compose -f docker/Linux-JDK21/docker-compose.yml up --build --exit-code-from cantaloupe
       - name: Test in Windows JDK 21
         if: matrix.os == 'windows-latest' && matrix.java == 'jdk21'
-        run: docker-compose -f docker/Windows-JDK21/docker-compose.yml up --build --exit-code-from cantaloupe
+        run: docker compose -f docker/Windows-JDK21/docker-compose.yml up --build --exit-code-from cantaloupe
       # TODO: Windows+GraalVM
 
