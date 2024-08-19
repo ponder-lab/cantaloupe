@@ -42,9 +42,9 @@ COPY dist/deps/Linux-x86-64/lib/* /usr/lib/
 #    && dpkg -i ./libgrokj2k1_7.6.5-1_amd64.deb \
 #    && dpkg -i --ignore-depends=libjpeg62-turbo ./grokj2k-tools_7.6.5-1_amd64.deb \
     # Install OpenJDK
-RUN wget -q https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz \
-    && tar xfz openjdk-18_linux-x64_bin.tar.gz \
-    && mv jdk-18 /opt/jdk \
+RUN wget -q https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3dbaee13770090416c/35/GPL/openjdk-21_linux-x64_bin.tar.gz \
+    && tar xfz openjdk-21_linux-x64_bin.tar.gz \
+    && mv jdk-21 /opt/jdk \
     # Install a newer Maven than the one in apt
     && wget -q https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz \
     && tar xfz apache-maven-3.8.8-bin.tar.gz \
