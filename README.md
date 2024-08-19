@@ -91,7 +91,7 @@ docker compose -f docker/Linux-JDK21/docker-compose.yml up --build -d
 docker exec -it linux-jdk21-cantaloupe-1 mvn --batch-mode test -Pbenchmark > out.txt
 ```
 
-(these are run by the ./run_jmh.sh script)
+(these are run by the [run_jmh.sh](https://github.com/ponder-lab/cantaloupe/blob/develop/run_jmh.sh) script)
 
 ## Contribute
 
