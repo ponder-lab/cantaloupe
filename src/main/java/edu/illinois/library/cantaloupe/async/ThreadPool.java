@@ -31,9 +31,7 @@ public final class ThreadPool {
         abstract String getThreadNamePrefix();
 
         public Thread newThread(Runnable runnable) {
-            Thread thread = new Thread(runnable);
-            thread.setName(getThreadNamePrefix() + "-" + getThreadID());
-            thread.setDaemon(true);
+            Thread thread = Thread.ofVirtual().name(getThreadNamePrefix() + "-", Long.parseLong(getThreadID())).unstarted(runnable);
             return thread;
         }
     }
@@ -66,11 +64,11 @@ public final class ThreadPool {
 
     private boolean isShutdown = false;
     private final ExecutorService lowPriorityPool =
-            Executors.newCachedThreadPool(new LowPriorityThreadFactory());
+            Executors.newThreadPerTaskExecutor(new LowPriorityThreadFactory());
     private final ExecutorService normalPriorityPool =
-            Executors.newCachedThreadPool(new NormalPriorityThreadFactory());
+            Executors.newThreadPerTaskExecutor(new NormalPriorityThreadFactory());
     private final ExecutorService highPriorityPool =
-            Executors.newCachedThreadPool(new HighPriorityThreadFactory());
+            Executors.newThreadPerTaskExecutor(new HighPriorityThreadFactory());
 
     /**
      * @return Shared instance.

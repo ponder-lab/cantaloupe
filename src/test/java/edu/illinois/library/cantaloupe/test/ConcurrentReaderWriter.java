@@ -34,7 +34,7 @@ public class ConcurrentReaderWriter {
 
     public void run() throws Exception {
         for (int i = 0; i < numThreads / 2f; i++) {
-            new Thread(() -> { // writer thread
+            Thread.ofVirtual().start(() -> { // writer thread
                 try {
                     writer.call();
                 } catch (Exception e) {
@@ -43,9 +43,9 @@ public class ConcurrentReaderWriter {
                 } finally {
                     writeCount.incrementAndGet();
                 }
-            }).start();
+            });
 
-            new Thread(() -> {
+            Thread.ofVirtual().start(() -> {
                 while (true) {
                     // Spin until we have something to read.
                     if (writeCount.get() > 0) {
@@ -62,7 +62,7 @@ public class ConcurrentReaderWriter {
                         sleep(1);
                     }
                 }
-            }).start();
+            });
         }
 
         while (readCount.get() < numThreads / 2f ||
