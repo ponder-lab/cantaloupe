@@ -12,6 +12,8 @@ import edu.illinois.library.cantaloupe.test.ConcurrentReaderWriter;
 import edu.illinois.library.cantaloupe.test.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -188,8 +190,9 @@ abstract class AbstractCacheTest extends BaseTest {
         assertNotExists(instance, ops);
     }
 
-    @Test
-    void testNewDerivativeImageInputStreamConcurrently() throws Exception {
+    @ParameterizedTest
+    @ValueSource(ints = {500})
+    void testNewDerivativeImageInputStreamConcurrently(int numThreads) throws Exception {
         final DerivativeCache instance = newInstance();
         final OperationList ops = OperationList.builder()
                 .withIdentifier(new Identifier("cats"))
@@ -213,7 +216,7 @@ abstract class AbstractCacheTest extends BaseTest {
                 }
             }
             return null;
-        }).run();
+        }, numThreads).run();
     }
 
     /* newDerivativeImageOutputStream() */
@@ -559,8 +562,9 @@ abstract class AbstractCacheTest extends BaseTest {
      * DerivativeCache#put(Identifier, Info)} and {@link
      * DerivativeCache#getInfo(Identifier)} don't conflict.
      */
-    @Test
-    void testPutWithInfoConcurrently() throws Exception {
+    @ParameterizedTest
+    @ValueSource(ints = {500})
+    void testPutWithInfoConcurrently(int numThreads) throws Exception {
         final DerivativeCache instance = newInstance();
         final Identifier identifier    = new Identifier("monkeys");
         final Info info                = new Info();
@@ -574,7 +578,7 @@ abstract class AbstractCacheTest extends BaseTest {
                 fail();
             }
             return null;
-        }).run();
+        }, numThreads).run();
     }
 
     @Test
@@ -610,8 +614,9 @@ abstract class AbstractCacheTest extends BaseTest {
      * DerivativeCache#put(Identifier, String)} and {@link
      * DerivativeCache#getInfo(Identifier)} don't conflict.
      */
-    @Test
-    void testPutWithStringConcurrently() throws Exception {
+    @ParameterizedTest
+    @ValueSource(ints = {500})
+    void testPutWithStringConcurrently(int numThreads) throws Exception {
         final DerivativeCache instance = newInstance();
         final Identifier identifier    = new Identifier("monkeys");
         final Info info                = new Info();
@@ -626,7 +631,7 @@ abstract class AbstractCacheTest extends BaseTest {
                 fail();
             }
             return null;
-        }).run();
+        }, numThreads).run();
     }
 
 }

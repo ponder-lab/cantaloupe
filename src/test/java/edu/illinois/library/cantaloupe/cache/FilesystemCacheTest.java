@@ -36,6 +36,29 @@ import static edu.illinois.library.cantaloupe.test.Assert.PathAssert.assertRecur
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
+import java.util.concurrent.TimeUnit;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
+import org.openjdk.jmh.annotations.Warmup;
+import static edu.illinois.library.cantaloupe.test.PerformanceTestConstants.*;
+
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@Warmup(iterations = WARMUP_ITERATIONS,
+        time = WARMUP_TIME)
+@Measurement(iterations = MEASUREMENT_ITERATIONS,
+        time = MEASUREMENT_TIME)
+@State(Scope.Benchmark)
+@Fork(value = 1, jvmArgs = { "-server", "-Xms128M", "-Xmx128M", "-Dcantaloupe.config=memory" })
 public class FilesystemCacheTest extends AbstractCacheTest {
 
     private Path fixturePath;
@@ -43,8 +66,12 @@ public class FilesystemCacheTest extends AbstractCacheTest {
     private Path sourceImagePath;
     private Path derivativeImagePath;
     private FilesystemCache instance;
+    
+    @Param({"10", "50", "100", "500", "1000", "5000"})
+    private int numThreads;
 
     @BeforeEach
+    @Setup
     public void setUp() throws Exception {
         super.setUp();
 
@@ -57,6 +84,7 @@ public class FilesystemCacheTest extends AbstractCacheTest {
     }
 
     @AfterEach
+    @TearDown
     public void tearDown() throws IOException {
         try {
             Files.walkFileTree(fixturePath, new DeletingFileVisitor());
@@ -374,7 +402,8 @@ public class FilesystemCacheTest extends AbstractCacheTest {
     }
 
     @Test
-    void testGetSourceImageFileConcurrently() throws Exception {
+    @Benchmark
+    public void testGetSourceImageFileConcurrently() throws Exception {
         assumeFalse(SystemUtils.IS_OS_WINDOWS); // TODO: this fails in Windows CI with a flurry of AccessDeniedExceptions
         final Identifier identifier = new Identifier("monkeys");
 
@@ -387,14 +416,24 @@ public class FilesystemCacheTest extends AbstractCacheTest {
         }, () -> {
             instance.getSourceImageFile(identifier);
             return null;
-        }).run();
+        }, numThreads).run();
     }
 
     @Test
-    @Override
-    void testNewDerivativeImageInputStreamConcurrently() throws Exception {
+    @Benchmark
+    public void testNewDerivativeImageInputStreamConcurrently() throws Exception {
         assumeFalse(SystemUtils.IS_OS_WINDOWS); // TODO: this fails in Windows CI with a flurry of AccessDeniedExceptions
-        super.testNewDerivativeImageInputStreamConcurrently();
+        super.testNewDerivativeImageInputStreamConcurrently(numThreads);
+    }
+    
+    @Benchmark
+    public void testPutWithInfoConcurrently() throws Exception {
+        super.testPutWithInfoConcurrently(numThreads);
+    }
+    
+    @Benchmark
+    public void testPutWithStringConcurrently() throws Exception {
+        super.testPutWithStringConcurrently(numThreads);
     }
 
     /* newSourceImageOutputStream(Identifier) */
