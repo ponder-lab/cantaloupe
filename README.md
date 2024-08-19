@@ -72,7 +72,7 @@ file available that will spin up all needed dependencies in separate
 containers, and run the tests in another container. From the project root
 directory, invoke:
 
-  `docker-compose -f docker/{platform}/docker-compose.yml up --build --exit-code-from cantaloupe`.
+  `docker compose -f docker/{platform}/docker-compose.yml up --build --exit-code-from cantaloupe`.
 
 ### Output testing
 
@@ -83,6 +83,13 @@ that enables visual inspection of image output.
 
 Performance tests use [JMH](http://openjdk.java.net/projects/code-tools/jmh/).
 Run them with `mvn clean test -Pbenchmark`.
+
+To compose Docker image and pipe JMH results to output, run:
+
+```
+docker compose -f docker/Linux-JDK21/docker-compose.yml up --build -d
+docker exec -it linux-jdk21-cantaloupe-1 mvn --batch-mode test -Pbenchmark > out.txt
+```
 
 ## Contribute
 
